@@ -23,7 +23,7 @@ body {
   font-family: var(--font-base);
   background-color: var(--color-bg);
   color: var(--color-text);
-  overflow: hidden; /* Hide scrollbars since slides will handle full pages */
+  overflow: hidden; /* Prevent body scrolling so slides manage it */
   height: 100vh;
   width: 100vw;
   position: relative;
@@ -48,34 +48,62 @@ body {
   height: 100%;
 }
 
-/* Slide Base Folds */
+/* Base Wave Styling */
+.wave {
+  position: absolute;
+  top: 0;
+  width: 120px;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Slide Base Folds - Scrollable internally if content overflows */
 .slide {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 40px 140px; /* Space for waves */
+  padding: 80px 140px; /* Consistently have top/bottom padding for headers/buttons */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Align to top to prevent vertical clipping on small screens */
   align-items: center;
   text-align: center;
   opacity: 0;
   visibility: hidden;
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, visibility 0.6s;
   z-index: 1;
+  overflow-y: auto; /* Allow scroll inside active slide page */
+  -webkit-overflow-scrolling: touch; /* Smooth iOS kinetic scroll */
 }
 
 @media (max-width: 1024px) {
   .slide {
     padding: 60px 80px;
   }
+  .wave {
+    width: 60px; /* Scale down waves on tablets */
+  }
+}
+
+@media (max-width: 768px) {
+  .slide {
+    padding: 50px 35px; /* Narrower padding for maximum polaroid grid columns space */
+  }
+  .wave {
+    width: 30px; /* Make waves extremely narrow to fit layout on mobile */
+  }
 }
 
 @media (max-width: 480px) {
   .slide {
-    padding: 40px 50px;
+    padding: 40px 20px;
+  }
+  .wave {
+    width: 15px; /* Mini waves on tiny screens */
   }
 }
 
@@ -108,6 +136,7 @@ body {
 /* Themed Navigation Button Group inside slides */
 .slide-nav-btn {
   margin-top: 35px;
+  margin-bottom: 20px; /* Space from bottom scroll boundary */
   z-index: 10;
 }
 
@@ -423,6 +452,14 @@ body {
   transition: all 0.3s;
   display: flex;
   flex-direction: column;
+  width: 250px; /* Consistently set card size to prevent stretching */
+  margin: 0 auto; /* Center inside grid columns */
+}
+
+@media (max-width: 600px) {
+  .tilt-left, .tilt-right, .tilt-left-small, .tilt-right-small {
+    transform: none !important; /* Disable card tilts on narrow screens to prevent overflow */
+  }
 }
 
 .polaroid-card:hover {
@@ -519,6 +556,19 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 50px;
+  }
+}
+
+@media (max-width: 600px) {
+  .letter-paper,
+  .things-notebook {
+    width: 100% !important;
+    max-width: 290px !important;
+    padding: 24px 15px !important;
+    transform: none !important; /* Remove rotation on mobile to keep items clean and fit */
+  }
+  .main-polaroid {
+    transform: none !important; /* Remove rotation on mobile */
   }
 }
 
