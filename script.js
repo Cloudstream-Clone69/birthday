@@ -1,3 +1,70 @@
+let currentActiveId = 'slide-1';
+
+// Slide transition helper (Right to Left / Next)
+function nextSlide(targetId) {
+  const currentSlide = document.getElementById(currentActiveId);
+  const targetSlide = document.getElementById(targetId);
+  
+  if (!currentSlide || !targetSlide) return;
+  
+  // Prepare target slide offscreen on the right
+  targetSlide.classList.remove('to-left', 'to-right', 'from-left');
+  targetSlide.classList.add('from-right');
+  targetSlide.offsetHeight; // Force reflow
+  
+  // Animate transition
+  currentSlide.classList.remove('active');
+  currentSlide.classList.add('to-left');
+  
+  targetSlide.classList.add('active');
+  targetSlide.classList.remove('from-right');
+  
+  // Clean up exit class after animation ends
+  setTimeout(() => {
+    currentSlide.classList.remove('to-left');
+  }, 600);
+  
+  currentActiveId = targetId;
+
+  // Trigger a light confetti burst when opening the surprise memories!
+  if (targetId === 'slide-2') {
+    setTimeout(triggerSurpriseConfetti, 400);
+  }
+}
+
+// Slide transition helper (Left to Right / Previous)
+function prevSlide(targetId) {
+  const currentSlide = document.getElementById(currentActiveId);
+  const targetSlide = document.getElementById(targetId);
+  
+  if (!currentSlide || !targetSlide) return;
+  
+  // Prepare target slide offscreen on the left
+  targetSlide.classList.remove('to-left', 'to-right', 'from-right');
+  targetSlide.classList.add('from-left');
+  targetSlide.offsetHeight; // Force reflow
+  
+  // Animate transition
+  currentSlide.classList.remove('active');
+  currentSlide.classList.add('to-right');
+  
+  targetSlide.classList.add('active');
+  targetSlide.classList.remove('from-left');
+  
+  // Clean up exit class after animation ends
+  setTimeout(() => {
+    currentSlide.classList.remove('to-right');
+  }, 600);
+  
+  currentActiveId = targetId;
+}
+
+// Restart Surprise
+function restartSurprise() {
+  // Go back to slide 1
+  prevSlide('slide-1');
+}
+
 // Floating Hearts Background Generator
 const heartsBg = document.getElementById('hearts-bg');
 const hearts = ['❤️', '💖', '💕', '💌', '🌸', '✨'];
@@ -34,24 +101,11 @@ for(let i=0; i<6; i++) {
   setTimeout(spawnHeart, Math.random() * 4000);
 }
 
-// Scroll Helper
-function scrollToMemories() {
-  const memoriesSection = document.getElementById('memories-section');
-  if (memoriesSection) {
-    memoriesSection.scrollIntoView({ behavior: 'smooth' });
-    // Trigger a light confetti burst when opening the surprise!
-    setTimeout(() => {
-      triggerSurpriseConfetti();
-    }, 800);
-  }
-}
-
 // Like Button Toggle
 function toggleLike(btn) {
   btn.classList.toggle('liked');
   if (btn.classList.contains('liked')) {
     btn.innerText = '💖';
-    // Spawn custom bursting hearts at the player coordinates!
     const rect = btn.getBoundingClientRect();
     for (let i = 0; i < 8; i++) {
       spawnBurstHeart(rect.left + rect.width / 2, rect.top + rect.height / 2);
@@ -90,7 +144,6 @@ function spawnBurstHeart(x, y) {
     heart.remove();
   }, 1050);
 }
-
 
 // Music Player Logic with Fallback simulation if file is missing
 const audio = document.getElementById('birthday-audio');
@@ -148,7 +201,6 @@ function togglePlayPause() {
       console.log("Playing audio successfully!");
     }).catch(err => {
       console.log("Audio file missing or blocked by browser autoplays. Simulating playback interface...");
-      // Fallback simulation if sharmili.mp3 isn't available
       startSimulation();
     });
   } else {
@@ -164,7 +216,7 @@ function startSimulation() {
     currentSeconds++;
     if (currentSeconds >= totalDuration) {
       currentSeconds = 0;
-      togglePlayPause(); // Stop playing when track finishes
+      togglePlayPause();
     }
     updateProgress(currentSeconds);
   }, 1000);
@@ -187,12 +239,10 @@ function seekAudio(event) {
   if (audio && audio.duration && !simulateTimer) {
     audio.currentTime = percent * audio.duration;
   } else {
-    // If simulating, adjust current simulation seconds
     currentSeconds = Math.floor(percent * totalDuration);
     updateProgress(currentSeconds);
   }
 }
-
 
 // Confetti Canvas Particle System
 const canvas = document.getElementById('confetti-canvas');
@@ -215,13 +265,11 @@ class ConfettiParticle {
     this.color = ['#ff3377', '#ff85a2', '#ffccd5', '#9b5de5', '#f15bb5', '#fee440'][Math.floor(Math.random() * 6)];
     
     if (isExplosion) {
-      // Explode outwards radially
       const angle = Math.random() * Math.PI * 2;
       const speed = Math.random() * 12 + 6;
       this.speedX = Math.cos(angle) * speed;
       this.speedY = Math.sin(angle) * speed - 3;
     } else {
-      // Standard falling side-to-side
       this.speedX = Math.random() * 6 - 3;
       this.speedY = Math.random() * -10 - 5;
     }
@@ -251,14 +299,13 @@ class ConfettiParticle {
 // Burst confetti from the bottom-right party card
 function triggerCelebrationConfetti() {
   resizeCanvas();
-  const startX = window.innerWidth * 0.8; // Align with party card on right
+  const startX = window.innerWidth * 0.8;
   const startY = window.innerHeight * 0.8;
   
   for (let i = 0; i < 120; i++) {
     particles.push(new ConfettiParticle(startX, startY, true));
   }
   
-  // Also add some standard overhead confetti
   for(let i=0; i<40; i++) {
     particles.push(new ConfettiParticle(Math.random() * window.innerWidth, -10));
   }
@@ -266,7 +313,7 @@ function triggerCelebrationConfetti() {
   if (!animFrameId) animateConfetti();
 }
 
-// Light burst when scrolling to memories surprise
+// Light burst when transitioning to slide-2 memories
 function triggerSurpriseConfetti() {
   resizeCanvas();
   const startX = window.innerWidth / 2;
@@ -286,7 +333,6 @@ function animateConfetti() {
     p.update();
     p.draw();
     
-    // Remove if outside screen
     if (p.y > canvas.height + 10 || p.x < -10 || p.x > canvas.width + 10) {
       particles.splice(index, 1);
     }

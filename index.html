@@ -14,221 +14,230 @@
   <!-- Floating hearts container in background -->
   <div class="hearts-background" id="hearts-bg"></div>
 
-  <!-- Main Website Wrapper -->
-  <div class="scroll-container">
+  <!-- Main Website Container with responsive Waves -->
+  <div class="app-container">
+    <div class="wave wave-left"></div>
+    <div class="wave wave-right"></div>
     
-    <!-- SECTION 1: Welcome Hero Fold -->
-    <header class="section-fold hero-fold">
-      <div class="hero-left">
-        <span class="text-greet font-handwriting">Hey</span>
-        <h1 class="text-name font-glow">Krutika</h1>
-        <p class="text-tagline">It's not just your birthday today,<br>it's a <span class="highlight-pink">celebration</span> of you! ❤️</p>
-        <p class="text-subgreet font-handwriting">Happy Birthday, Bestiee! 🥂</p>
-        <button class="btn btn-glow-pink" onclick="scrollToMemories()">
-          <span class="btn-icon">🎁</span> Open Your Surprise
-        </button>
-      </div>
+    <div class="slides-wrapper">
       
-      <div class="hero-right">
-        <!-- Sticker collage simulating Krutika's cutout photos -->
-        <div class="sticker-collage">
-          <div class="collage-item sticker-1">
-            <div class="photo-placeholder-collage">
-              <img src="assets/black_rock.jpg" alt="Bestie Rock Sign">
-            </div>
-          </div>
-          <div class="collage-item sticker-2">
-            <div class="photo-placeholder-collage">
-              <img src="assets/blue_side.jpg" alt="Krutika Blue Dress">
-            </div>
-          </div>
-          <div class="collage-item sticker-3">
-            <div class="photo-placeholder-collage">
-              <img src="assets/pink_side.jpg" alt="Krutika Pink Dress">
-            </div>
-          </div>
-          <div class="collage-item sticker-4">
-            <div class="photo-placeholder-collage">
-              <img src="assets/black_selfie.jpg" alt="Bestie Selfie">
-            </div>
-          </div>
-          <div class="collage-item sticker-5">
-            <div class="photo-placeholder-collage">
-              <img src="assets/blue_walkway.jpg" alt="Krutika Walkway">
-            </div>
-          </div>
+      <!-- Slide 1: Welcome Hero Slide -->
+      <div class="slide active hero-fold" id="slide-1">
+        <div class="hero-left">
+          <span class="text-greet font-handwriting">Hey</span>
+          <h1 class="text-name font-glow">Krutika</h1>
+          <p class="text-tagline">It's not just your birthday today,<br>it's a <span class="highlight-pink">celebration</span> of you! ❤️</p>
+          <p class="text-subgreet font-handwriting">Happy Birthday, Bestiee! 🥂</p>
+          <button class="btn btn-glow-pink" onclick="nextSlide('slide-2')">
+            <span class="btn-icon">🎁</span> Open Your Surprise
+          </button>
         </div>
-      </div>
-    </header>
-
-    <!-- SECTION 2: Our Memories Polaroid Gallery -->
-    <section class="section-fold memories-fold" id="memories-section">
-      <div class="section-header">
-        <h2 class="section-title font-glow">~ Our Memories ~</h2>
-        <p class="section-subtitle">Some people make your laugh a little louder,<br>your smile a little brighter and your life a <span class="highlight-pink">whole lot better.</span> ❤️</p>
-      </div>
-
-      <!-- Polaroid Grid of 6 photo frames -->
-      <div class="polaroid-grid">
-        <!-- Polaroid 1 -->
-        <div class="polaroid-card tilt-left">
-          <div class="tape-mask"></div>
-          <div class="photo-placeholder-card">
-            <img src="assets/black_selfie.jpg" alt="Gedi Maarna">
-          </div>
-          <div class="polaroid-caption font-handwriting">Gedi maarna & unplanned plans!</div>
-        </div>
-
-        <!-- Polaroid 2 -->
-        <div class="polaroid-card tilt-right">
-          <div class="tape-mask"></div>
-          <div class="photo-placeholder-card">
-            <img src="assets/black_rock.jpg" alt="Backchodi Level">
-          </div>
-          <div class="polaroid-caption font-handwriting">Backchodi level = Legendary 😎</div>
-        </div>
-
-        <!-- Polaroid 3 -->
-        <div class="polaroid-card tilt-left-small">
-          <div class="tape-mask"></div>
-          <div class="photo-placeholder-card">
-            <img src="assets/blue_side.jpg" alt="Outfits On Point">
-          </div>
-          <div class="polaroid-caption font-handwriting">Outfits on point, vaibes always</div>
-        </div>
-
-        <!-- Polaroid 4 -->
-        <div class="polaroid-card tilt-right-small">
-          <div class="tape-mask"></div>
-          <div class="photo-placeholder-card">
-            <img src="assets/pink_front.jpg" alt="Fakira Mood">
-          </div>
-          <div class="polaroid-caption font-handwriting">Fakira mood on, tension gone ✨</div>
-        </div>
-
-        <!-- Polaroid 5 -->
-        <div class="polaroid-card tilt-left">
-          <div class="tape-mask"></div>
-          <div class="photo-placeholder-card">
-            <img src="assets/blue_closeup.jpg" alt="Candid Pose">
-          </div>
-          <div class="polaroid-caption font-handwriting">Candid ho ya pose, Queen always 💖</div>
-        </div>
-
-        <!-- Polaroid 6 -->
-        <div class="polaroid-card tilt-right">
-          <div class="tape-mask"></div>
-          <div class="photo-placeholder-card">
-            <img src="assets/blue_walkway.jpg" alt="Special Memory">
-          </div>
-          <div class="polaroid-caption font-handwriting">Har memory special hai!</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 3: A Little Note For You -->
-    <section class="section-fold letter-fold">
-      <h2 class="section-title font-glow">A Little Note For You ♡</h2>
-      
-      <div class="letter-layout">
-        <!-- Left Column: Love Letter -->
-        <div class="letter-paper">
-          <div class="letter-text font-handwriting">
-            <p class="salutation">Dear Krutika,</p>
-            <p>There are friends, and then there are people like you – who become family.</p>
-            <p>Thank you for being my constant partner in crime, my therapist, my laughter dose and my reality check.</p>
-            <p>No matter how crazy life gets, I know you'll always have my back and I'll always have yours.</p>
-            <p class="special-line">Keep shining, keep smiling and keep being the amazing you!</p>
-            <p class="signature">Happy Birthday, Bestiee! ❤️</p>
-          </div>
-        </div>
-
-        <!-- Center Column: Main Photo Polaroid -->
-        <div class="main-photo-column">
-          <div class="polaroid-card main-polaroid">
-            <div class="tape-mask-large"></div>
-            <div class="photo-placeholder-main">
-              <img src="assets/blue_closeup.jpg" alt="Krutika Portrait">
-            </div>
-            <div class="polaroid-caption font-handwriting">Our Birthday Star 👑</div>
-          </div>
-        </div>
-
-        <!-- Right Column: List of Things -->
-        <div class="things-notebook">
-          <div class="notebook-header">
-            <h3 class="notebook-title font-handwriting">Things I love about you 💖</h3>
-          </div>
-          <ul class="notebook-list font-handwriting">
-            <li><span class="bullet-heart">💖</span> Your beautiful soul</li>
-            <li><span class="bullet-heart">💖</span> Your crazy sense of humour</li>
-            <li><span class="bullet-heart">💖</span> Your kind heart</li>
-            <li><span class="bullet-heart">💖</span> Your drama (the good one 😜)</li>
-            <li><span class="bullet-heart">💖</span> Your never give up attitude</li>
-            <li><span class="bullet-heart">💖</span> You, just the way you are!</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECTION 4: Interactive Footer Fold -->
-    <footer class="section-fold footer-fold">
-      <div class="footer-layout">
         
-        <!-- Left: Custom Music Player widget -->
-        <div class="music-player-card">
-          <div class="player-top">
-            <div class="album-art">
-              <img src="assets/blue_closeup.jpg" alt="Album Art" class="album-art-img">
-            </div>
-            <div class="track-info">
-              <h4 class="track-title">Sharmili</h4>
-              <p class="track-artist">Frappe Ash</p>
-            </div>
-            <button class="btn-like" onclick="toggleLike(this)">❤️</button>
-          </div>
-          
-          <div class="player-controls-container">
-            <div class="progress-bar-container">
-              <span class="time-elapsed" id="time-elapsed">0:00</span>
-              <div class="progress-bar-track" id="progress-bar-track" onclick="seekAudio(event)">
-                <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        <div class="hero-right">
+          <div class="sticker-collage">
+            <div class="collage-item sticker-1">
+              <div class="photo-placeholder-collage">
+                <img src="assets/black_rock.jpg" alt="Bestie Rock Sign">
               </div>
-              <span class="time-duration" id="time-duration">2:45</span>
+            </div>
+            <div class="collage-item sticker-2">
+              <div class="photo-placeholder-collage">
+                <img src="assets/blue_side.jpg" alt="Krutika Blue Dress">
+              </div>
+            </div>
+            <div class="collage-item sticker-3">
+              <div class="photo-placeholder-collage">
+                <img src="assets/pink_side.jpg" alt="Krutika Pink Dress">
+              </div>
+            </div>
+            <div class="collage-item sticker-4">
+              <div class="photo-placeholder-collage">
+                <img src="assets/black_selfie.jpg" alt="Bestie Selfie">
+              </div>
+            </div>
+            <div class="collage-item sticker-5">
+              <div class="photo-placeholder-collage">
+                <img src="assets/blue_walkway.jpg" alt="Krutika Walkway">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Memories Slide -->
+      <div class="slide memories-fold" id="slide-2">
+        <div class="section-header">
+          <h2 class="section-title font-glow">~ Our Memories ~</h2>
+          <p class="section-subtitle">Some people make your laugh a little louder,<br>your smile a little brighter and your life a <span class="highlight-pink">whole lot better.</span> ❤️</p>
+        </div>
+
+        <div class="polaroid-grid">
+          <div class="polaroid-card tilt-left">
+            <div class="tape-mask"></div>
+            <div class="photo-placeholder-card">
+              <img src="assets/black_selfie.jpg" alt="Gedi Maarna">
+            </div>
+            <div class="polaroid-caption font-handwriting">Gedi maarna & unplanned plans!</div>
+          </div>
+
+          <div class="polaroid-card tilt-right">
+            <div class="tape-mask"></div>
+            <div class="photo-placeholder-card">
+              <img src="assets/black_rock.jpg" alt="Backchodi Level">
+            </div>
+            <div class="polaroid-caption font-handwriting">Backchodi level = Legendary 😎</div>
+          </div>
+
+          <div class="polaroid-card tilt-left-small">
+            <div class="tape-mask"></div>
+            <div class="photo-placeholder-card">
+              <img src="assets/blue_side.jpg" alt="Outfits On Point">
+            </div>
+            <div class="polaroid-caption font-handwriting">Outfits on point, vaibes always</div>
+          </div>
+
+          <div class="polaroid-card tilt-right-small">
+            <div class="tape-mask"></div>
+            <div class="photo-placeholder-card">
+              <img src="assets/pink_front.jpg" alt="Fakira Mood">
+            </div>
+            <div class="polaroid-caption font-handwriting">Fakira mood on, tension gone ✨</div>
+          </div>
+
+          <div class="polaroid-card tilt-left">
+            <div class="tape-mask"></div>
+            <div class="photo-placeholder-card">
+              <img src="assets/blue_closeup.jpg" alt="Candid Pose">
+            </div>
+            <div class="polaroid-caption font-handwriting">Candid ho ya pose, Queen always 💖</div>
+          </div>
+
+          <div class="polaroid-card tilt-right">
+            <div class="tape-mask"></div>
+            <div class="photo-placeholder-card">
+              <img src="assets/blue_walkway.jpg" alt="Special Memory">
+            </div>
+            <div class="polaroid-caption font-handwriting">Har memory special hai!</div>
+          </div>
+        </div>
+
+        <div class="button-group slide-nav-btn">
+          <button class="btn btn-glow-pink" onclick="nextSlide('slide-3')">
+            <span class="btn-icon">💌</span> Read My Letter
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide 3: Letter & Lists Slide -->
+      <div class="slide letter-fold" id="slide-3">
+        <h2 class="section-title font-glow">A Little Note For You ♡</h2>
+        
+        <div class="letter-layout">
+          <div class="letter-paper">
+            <div class="letter-text font-handwriting">
+              <p class="salutation">Dear Krutika,</p>
+              <p>There are friends, and then there are people like you – who become family.</p>
+              <p>Thank you for being my constant partner in crime, my therapist, my laughter dose and my reality check.</p>
+              <p>No matter how crazy life gets, I know you'll always have my back and I'll always have yours.</p>
+              <p class="special-line">Keep shining, keep smiling and keep being the amazing you!</p>
+              <p class="signature">Happy Birthday, Bestiee! ❤️</p>
+            </div>
+          </div>
+
+          <div class="main-photo-column">
+            <div class="polaroid-card main-polaroid">
+              <div class="tape-mask-large"></div>
+              <div class="photo-placeholder-main">
+                <img src="assets/blue_closeup.jpg" alt="Krutika Portrait">
+              </div>
+              <div class="polaroid-caption font-handwriting">Our Birthday Star 👑</div>
+            </div>
+          </div>
+
+          <div class="things-notebook">
+            <div class="notebook-header">
+              <h3 class="notebook-title font-handwriting">Things I love about you 💖</h3>
+            </div>
+            <ul class="notebook-list font-handwriting">
+              <li><span class="bullet-heart">💖</span> Your beautiful soul</li>
+              <li><span class="bullet-heart">💖</span> Your crazy sense of humour</li>
+              <li><span class="bullet-heart">💖</span> Your kind heart</li>
+              <li><span class="bullet-heart">💖</span> Your drama (the good one 😜)</li>
+              <li><span class="bullet-heart">💖</span> Your never give up attitude</li>
+              <li><span class="bullet-heart">💖</span> You, just the way you are!</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="button-group slide-nav-btn">
+          <button class="btn btn-glow-pink" onclick="nextSlide('slide-4')">
+            <span class="btn-icon">🎉</span> Let's Celebrate!
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide 4: Music & Celebrate Footer Slide -->
+      <div class="slide footer-fold" id="slide-4">
+        <div class="footer-layout">
+          
+          <div class="music-player-card">
+            <div class="player-top">
+              <div class="album-art">
+                <img src="assets/blue_closeup.jpg" alt="Album Art" class="album-art-img">
+              </div>
+              <div class="track-info">
+                <h4 class="track-title">Sharmili</h4>
+                <p class="track-artist">Frappe Ash</p>
+              </div>
+              <button class="btn-like" onclick="toggleLike(this)">❤️</button>
             </div>
             
-            <div class="player-buttons">
-              <button class="player-btn prev-btn">⏮</button>
-              <button class="player-btn play-btn" id="play-pause-btn" onclick="togglePlayPause()">▶</button>
-              <button class="player-btn next-btn">⏭</button>
+            <div class="player-controls-container">
+              <div class="progress-bar-container">
+                <span class="time-elapsed" id="time-elapsed">0:00</span>
+                <div class="progress-bar-track" id="progress-bar-track" onclick="seekAudio(event)">
+                  <div class="progress-bar-fill" id="progress-bar-fill"></div>
+                </div>
+                <span class="time-duration" id="time-duration">2:45</span>
+              </div>
+              
+              <div class="player-buttons">
+                <button class="player-btn prev-btn">⏮</button>
+                <button class="player-btn play-btn" id="play-pause-btn" onclick="togglePlayPause()">▶</button>
+                <button class="player-btn next-btn">⏭</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Middle: Bottom Birthday Greetings -->
-        <div class="footer-center">
-          <h2 class="footer-greet font-glow">Happy Birthday, <br><span class="font-accent font-glow">Krutika</span></h2>
-          <p class="footer-tagline font-handwriting">Stay happy. Stay crazy. Keep making memories.<br>The best is yet to come! ❤️</p>
-        </div>
-
-        <!-- Right: Celebration Card -->
-        <div class="party-card">
-          <div class="cake-box">
-            <span class="cake-icon">🎂</span>
+          <div class="footer-center">
+            <h2 class="footer-greet font-glow">Happy Birthday, <br><span class="font-accent font-glow">Krutika</span></h2>
+            <p class="footer-tagline font-handwriting">Stay happy. Stay crazy. Keep making memories.<br>The best is yet to come! ❤️</p>
           </div>
-          <p class="party-text">Ab party de kanjoos! 😂</p>
-          <button class="btn btn-glow-pink" id="celebrate-btn" onclick="triggerCelebrationConfetti()">
-            Let's Celebrate! 🥳
+
+          <div class="party-card">
+            <div class="cake-box">
+              <span class="cake-icon">🎂</span>
+            </div>
+            <p class="party-text">Ab party de kanjoos! 😂</p>
+            <button class="btn btn-glow-pink" id="celebrate-btn" onclick="triggerCelebrationConfetti()">
+              Let's Celebrate! 🥳
+            </button>
+          </div>
+
+        </div>
+
+        <div class="button-group slide-nav-btn restart-btn-group">
+          <button class="btn btn-secondary" onclick="restartSurprise()">
+            <span class="btn-icon">❤️</span> Start Over
           </button>
         </div>
 
+        <div class="footer-credits">
+          <p>Made with 💖 for my bestiee, Krutika ✨</p>
+        </div>
       </div>
 
-      <div class="footer-credits">
-        <p>Made with 💖 for my bestiee, Krutika ✨</p>
-      </div>
-    </footer>
-
+    </div>
   </div>
 
   <!-- Audio Element for the song -->

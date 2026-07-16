@@ -23,22 +23,94 @@ body {
   font-family: var(--font-base);
   background-color: var(--color-bg);
   color: var(--color-text);
-  overflow-x: hidden;
+  overflow: hidden; /* Hide scrollbars since slides will handle full pages */
+  height: 100vh;
+  width: 100vw;
   position: relative;
-  min-height: 100vh;
 }
 
-/* Notebook grid background for sections */
-.scroll-container {
-  display: flex;
-  flex-direction: column;
+/* Main Container with Grid */
+.app-container {
   position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   z-index: 2;
   background-size: 40px 40px;
   background-image: 
     linear-gradient(to right, rgba(255, 51, 119, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 51, 119, 0.03) 1px, transparent 1px);
 }
+
+.slides-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Slide Base Folds */
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 140px; /* Space for waves */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.6s ease, visibility 0.6s;
+  z-index: 1;
+}
+
+@media (max-width: 1024px) {
+  .slide {
+    padding: 60px 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide {
+    padding: 40px 50px;
+  }
+}
+
+.slide.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+  z-index: 3;
+}
+
+/* Transition Directions */
+.slide.to-left {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.slide.from-right {
+  transform: translateX(100%);
+}
+
+.slide.to-right {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+.slide.from-left {
+  transform: translateX(-100%);
+}
+
+/* Themed Navigation Button Group inside slides */
+.slide-nav-btn {
+  margin-top: 35px;
+  z-index: 10;
+}
+
 
 /* Floating Hearts Background */
 .hearts-background {
@@ -78,62 +150,17 @@ body {
   }
 }
 
-/* Section Folds */
-.section-fold {
-  min-height: 100vh;
-  padding: 80px 10vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-
-@media (max-width: 768px) {
-  .section-fold {
-    padding: 60px 5vw;
-  }
-}
-
-/* Gimmick decoration waves */
-.hero-fold::before,
-.memories-fold::after,
-.letter-fold::after {
-  content: '';
-  position: absolute;
+/* Section waves aligned globally to app-container */
+.wave-left {
   left: 0;
-  width: 160px;
-  height: 100%;
-  z-index: 4;
-  pointer-events: none;
-  opacity: 0.85;
-}
-
-.hero-fold::before {
-  top: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000' preserveAspectRatio='none'><path d='M0,0 L30,0 C60,180 10,280 45,450 C80,620 20,720 55,870 C70,950 40,970 20,1000 L0,1000 Z' fill='%234a1324' opacity='0.9'/><path d='M0,0 L15,0 C35,140 5,240 30,410 C55,580 15,680 40,830 C50,910 25,930 10,1000 L0,1000 Z' fill='%23ff3377' opacity='0.45'/></svg>");
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000' preserveAspectRatio='none'><path d='M0,0 L30,0 C50,150 10,250 40,400 C70,550 20,650 50,800 C70,900 30,950 15,1000 L0,1000 Z' fill='%234a1324' opacity='0.9'/><path d='M0,0 L15,0 C30,120 0,220 25,370 C50,520 10,620 35,770 C50,870 20,920 10,1000 L0,1000 Z' fill='%23ff3377' opacity='0.45'/></svg>");
   background-size: 100% 100%;
 }
 
-.scroll-container::after {
-  content: '';
-  position: absolute;
+.wave-right {
   right: 0;
-  top: 0;
-  width: 160px;
-  height: 100%;
-  z-index: 4;
-  pointer-events: none;
-  opacity: 0.85;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000' preserveAspectRatio='none'><path d='M100,0 L70,0 C40,180 90,280 55,450 C20,620 80,720 45,870 C30,950 60,970 80,1000 L100,1000 Z' fill='%234a1324' opacity='0.9'/><path d='M100,0 L85,0 C65,140 95,240 70,410 C45,580 85,680 60,830 C50,910 75,930 90,1000 L100,1000 Z' fill='%23ff3377' opacity='0.45'/></svg>");
   background-size: 100% 100%;
-}
-
-@media (max-width: 1024px) {
-  .hero-fold::before,
-  .scroll-container::after {
-    width: 60px;
-  }
 }
 
 /* Typography styles */
