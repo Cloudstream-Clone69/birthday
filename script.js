@@ -28,6 +28,7 @@ function nextSlide(targetId) {
 
   // Trigger a light confetti burst when opening the surprise memories!
   if (targetId === 'slide-2') {
+    if (!isPlaying) togglePlayPause();
     setTimeout(triggerSurpriseConfetti, 400);
   }
 }
@@ -63,6 +64,16 @@ function prevSlide(targetId) {
 function restartSurprise() {
   // Go back to slide 1
   prevSlide('slide-1');
+  
+  // Stop and reset audio playback
+  if (isPlaying) {
+    togglePlayPause();
+  }
+  if (audio) {
+    audio.currentTime = 0;
+  }
+  currentSeconds = 0;
+  updateProgress(0);
 }
 
 // Floating Hearts Background Generator
